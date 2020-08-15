@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<script src="./wasm_exec.js"></script>
+		<script>
+			const go = new Go();
+			WebAssembly.instantiateStreaming(fetch("stopka.wasm"), go.importObject).then((result) => {
+				go.run(result.instance);
+
+				const input = document.getElementById("line");
+                const log = document.getElementById("log");
+                const eval = () => {
+                    if (input.value === "") {
+                        return
+                    }
+                    const line = input.value;
+                    input.value = "";
+                    result = stopka(line);
+                    log.innerHTML += `<code>> ${line}</code><br><code>${result}</code><hr>`
+                }
+				input.addEventListener("keydown", function(event) {
+					if (event.key === "Enter") {
+						event.preventDefault();
+                        eval()
+					}
+				});
+                document.getElementById("submit").addEventListener("click", function(event) {
+                    event.preventDefault();
+                    eval()
+                });
+			});
+		</script>
+	</head>
+	<body>
+		<h3>stopka online REPL</h3>
+        <p>available words: dup swap drop map + - </p>
+		<ul id="log"></ul>
+		<input id="line"
+               type="text"
+               autofocus
+               placeholder="(1 2 3) dup (10 +) map"
+               value="(1 2 3) dup (10 +) map"/>
+        <button id="submit">eval</button>
+	</body>
+</html>
