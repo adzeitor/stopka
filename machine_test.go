@@ -154,6 +154,21 @@ func TestMachine_Eval(t *testing.T) {
 			},
 			halted: false,
 		},
+		{
+			name: "define simple value",
+			line: `42 'answer define answer answer`,
+			want: Values{
+				Integer(42), Integer(42),
+			},
+			halted: false,
+		},
+		{
+			name: "map with defined function",
+			line: `(dup +) 'double define (1 2 3) double map`,
+			want: Values{
+				List{Integer(2), Integer(4), Integer(6)},
+			},
+		},
 	}
 	for _, tt := range tests {
 		name := tt.name

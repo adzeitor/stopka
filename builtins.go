@@ -89,3 +89,17 @@ func (m *Machine) Apply() {
 
 	m.evalValue(Identifier(fn.(Symbol)))
 }
+
+// define ( value name --  )
+func (m *Machine) Define() {
+	name := m.Pop()
+	if m.IsHalted() {
+		return
+	}
+	value := m.Pop()
+	if m.IsHalted() {
+		return
+	}
+
+	m.words[string(name.(Symbol))] = value
+}

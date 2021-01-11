@@ -24,6 +24,7 @@ func New() *Machine {
 	m.AddBuiltin("map", m.Map)
 	m.AddBuiltin("apply", m.Apply)
 	m.AddBuiltin("string", m.ToString)
+	m.AddBuiltin("define", m.Define)
 	return m
 }
 
