@@ -66,7 +66,6 @@ func Satisfy(fn func(rune) bool) Parser {
 		}
 		r := []rune(s.Remains)[0]
 		if fn(r) {
-			// FIXME: multibyte bug
 			return State{Value: r, Remains: string([]rune(s.Remains)[1:])}
 		}
 		return State{Remains: s.Remains, Err: ErrNoMatch}

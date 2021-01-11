@@ -13,12 +13,12 @@ func (n String) Plus(other Value) Value {
 	case Integer:
 		return String(strconv.Itoa(int(value)) + string(n))
 	default:
-		return Exception("string plus only compatible with string or int ")
+		return Exception("string plus only compatible with string or int")
 	}
 }
 
 func (n String) Minus(other Value) Value {
-	panic("not implemented")
+	return Exception("minus operator is not supported for string")
 }
 
 func (n String) ToString() Value {

@@ -1,12 +1,20 @@
 package stopka
 
+import "fmt"
+
 type List []Value
 
 func (n List) Plus(other Value) Value {
-	if _, ok := other.(List); !ok {
-		return append(n, other)
+	switch value := other.(type) {
+	case List:
+		return append(value, n...)
+	case Identifier:
+		return append(n, value)
+	default:
+		return Exception(
+			fmt.Sprintf("plus is not defined for %T type", other),
+		)
 	}
-	return append(other.(List), n...)
 }
 
 func (n List) Minus(other Value) Value {

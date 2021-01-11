@@ -1,6 +1,9 @@
 package stopka
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Integer int
 
@@ -9,7 +12,9 @@ func (n Integer) Plus(other Value) Value {
 	case Integer:
 		return value + n
 	default:
-		panic("unknown type")
+		return Exception(
+			fmt.Sprintf("plus is not defined for %T type", other),
+		)
 	}
 }
 
@@ -18,7 +23,9 @@ func (n Integer) Minus(other Value) Value {
 	case Integer:
 		return value - n
 	default:
-		panic("unknown type")
+		return Exception(
+			fmt.Sprintf("minus is not defined for %T type", other),
+		)
 	}
 }
 

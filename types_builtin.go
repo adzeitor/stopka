@@ -6,11 +6,11 @@ type Builtin struct {
 }
 
 func (n Builtin) Plus(other Value) Value {
-	panic("not implemented")
+	return Exception("plus operator is not supported for builtin functions")
 }
 
 func (n Builtin) Minus(other Value) Value {
-	panic("not implemented")
+	return Exception("minus operator is not supported for builtin functions")
 }
 
 func (n Builtin) ToString() Value {

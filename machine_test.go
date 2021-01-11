@@ -167,3 +167,24 @@ func TestMachine_Eval(t *testing.T) {
 		})
 	}
 }
+
+func TestMachine_EvalUnsupportedOverload(t *testing.T) {
+	unsupportedExpressions := []string{
+		`(1 2 3) string`,
+		`5 (1 2 3) -`,
+		`"foo" "bar" -`,
+		`"foo" 42 +`,
+		`"foo" 42 -`,
+		`(1 2 3) 5 -`,
+		`(1 2 3) 5 +`,
+		`5 (1 2 3) +`,
+		`(1 2 3) (4 5 6) -`,
+		`'foo 5 -`,
+	}
+	for _, tt := range unsupportedExpressions {
+		t.Run(tt, func(t *testing.T) {
+			machine := New().Eval(tt)
+			assert.Equal(t, true, machine.IsHalted())
+		})
+	}
+}
