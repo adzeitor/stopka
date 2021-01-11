@@ -1,8 +1,9 @@
 package pc
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/adzeitor/stopka/assert"
 )
 
 func Test_interfacesToSlice(t *testing.T) {

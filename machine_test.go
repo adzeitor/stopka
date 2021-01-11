@@ -3,14 +3,14 @@ package stopka
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/adzeitor/stopka/assert"
 )
 
-func assertStack(t assert.TestingT, m *Machine, elements ...Value) {
+func assertStack(t *testing.T, m *Machine, elements ...Value) {
 	assert.Equal(t, elements, m.Stack())
 }
 
-func assertOperators(t assert.TestingT, m *Machine, operators ...Value) {
+func assertOperators(t *testing.T, m *Machine, operators ...Value) {
 	assert.Equal(t, operators, m.Operators())
 }
 

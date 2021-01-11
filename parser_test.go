@@ -3,8 +3,7 @@ package stopka
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
+	"github.com/adzeitor/stopka/assert"
 	"github.com/adzeitor/stopka/pc"
 )
 

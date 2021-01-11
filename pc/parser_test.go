@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/adzeitor/stopka/assert"
 )
 
 func Test_parse_OneOf(t *testing.T) {
