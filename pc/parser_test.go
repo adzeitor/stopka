@@ -119,7 +119,7 @@ func TestMany(t *testing.T) {
 		{
 			name: "not digit",
 			str:  "xxx",
-			want: State{Remains: "xxx"},
+			want: State{Remains: "xxx", Value: []int32{}},
 		},
 	}
 	for _, tt := range tests {

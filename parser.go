@@ -73,5 +73,5 @@ func word() pc.Parser {
 func words() pc.Parser {
 	// FIXME: pc.Str -> pc.Many1(pc.Char)
 	space := pc.Many(pc.Char(" "), []rune{})
-	return pc.Many(pc.Between(space, word(), space), []Value{})
+	return pc.Many1(pc.Between(space, word(), space), []Value{})
 }

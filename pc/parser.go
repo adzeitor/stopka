@@ -154,9 +154,7 @@ func Many(parser Parser, kind interface{}) Parser {
 			values = append(values, nextState.Value)
 		}
 		state.Remains = s.Remains
-		if values != nil {
-			state.Value = interfacesToSlice(values, kind)
-		}
+		state.Value = interfacesToSlice(values, kind)
 		return state
 	}
 }

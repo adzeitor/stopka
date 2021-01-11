@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/adzeitor/stopka/pc"
 )
 
 func Test_parse(t *testing.T) {
@@ -93,18 +95,22 @@ func Test_parse(t *testing.T) {
 	})
 
 	t.Run("not quoted string", func(t *testing.T) {
-		got, _ := parse(`"foo`)
-		assert.Equal(t, []Value{
-			List{
-				Integer(1), Integer(2),
-				List{Integer(3), Integer(4)},
-				Identifier("+"),
-			},
-		}, got)
+		_, err := parse(`"foo`)
+		assert.Equal(t, pc.ErrNoMatch, err)
 	})
 
-	//t.Run("not closed parens of list", func(t *testing.T) {
-	//	_, err := parse(`(1 2 3`)
-	//	assert.Equal(t, pc.ErrUnexpectedEnd, err)
-	//})
+	t.Run("not closed parens of list", func(t *testing.T) {
+		_, err := parse(`(1 2 3`)
+		assert.Equal(t, pc.ErrNoMatch, err)
+	})
+
+	t.Run("unknown expression", func(t *testing.T) {
+		_, err := parse(`[5]`)
+		assert.Equal(t, pc.ErrNoMatch, err)
+	})
+
+	t.Run("empty input is not panic", func(t *testing.T) {
+		_, err := parse(``)
+		assert.Equal(t, pc.ErrNoMatch, err)
+	})
 }
