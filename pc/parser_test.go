@@ -2,9 +2,10 @@ package pc
 
 import (
 	"errors"
-	"github.com/stretchr/testify/assert"
 	"strconv"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_parse_OneOf(t *testing.T) {
@@ -182,17 +183,10 @@ func TestParser_Between(t *testing.T) {
 }
 
 func TestParser_Map(t *testing.T) {
-	parser := Pure(5).Map(func(n int) string {
-		return strconv.Itoa(n)
-	})
-	assert.Equal(t, State{Value: "5", Remains: "..."}, parser.Run("..."))
-
-	t.Run("type of value on error should be set", func(t *testing.T) {
-		t.Skip()
-		parser = Fail(errors.New("error")).Map(func(n int) string {
+	t.Run("Simple case", func(t *testing.T) {
+		parser := Pure(5).Map(func(n int) string {
 			return strconv.Itoa(n)
 		})
-		got := parser.Run("...")
-		assert.IsType(t, "", got.Value)
+		assert.Equal(t, State{Value: "5", Remains: "..."}, parser.Run("..."))
 	})
 }
